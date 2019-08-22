@@ -1,0 +1,49 @@
+' Name        : BLINK.pbp
+' Compiler    : PICBASIC PRO Compiler 2.6
+' Assembler   : PM or MPASM
+' Target PIC  : 16F or 18F types
+' Hardware    : Non specific
+' Oscillator  : internal or external
+' Keywords    : BLINK LED
+' Description : PICBASIC PRO program to to blink an LED connected
+' to PORTB.0 about once a second
+'
+
+'The following program is a simple test to blink an LED on and off.  Select a
+'device in the dropdown list above, then click the Compile Only button on the 
+'toolbar to compile the program and generate a hex file.
+
+' Configure pins for digital operation (uncomment as needed).
+' These settings are intended as simple examples.  For more detail,
+' see the appropriate device datasheet for register descriptions.
+'ANSEL =  %00000000  ' 16F88, 16F688, 16F690, 16F88x
+'ANSELH = %00000000  ' 16F690, 16F88x
+'ADCON1 = %00000111  ' 16F87x, 16F87xA, 18F452
+'ADCON1 = %00001111  ' 18F4620 
+
+@_DEVICE_HS_OSC
+@_DEVICE_MCLR_OFF
+@_DEVICE_WDT_OFF
+@_DEVICE_PWRT_OFF
+@_DEVICE_PROTECT_OFF
+@_DEVICE_CPD_OFF
+@_DEVICE_LVP_OFF
+@_DEVICE_BOD_OFF
+@_DEVICE_DEBUG_OFF
+@_DEVICE_WRT_OFF
+
+DEFINE OSC 20
+
+
+LED    VAR  PORTB.0   ' Assign name "LED" to PORTB.0
+
+mainloop:
+   High LED        ' Turn on LED connected to PORTB.0
+   Pause 500       ' Delay for .5 seconds
+
+   Low LED         ' Turn off LED connected to PORTB.0
+   Pause 500       ' Delay for .5 seconds
+
+   Goto mainloop   ' Go back to loop and blink LED forever
+   
+   End
